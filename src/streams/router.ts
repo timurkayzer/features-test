@@ -6,25 +6,16 @@ import { Stream } from 'node:stream';
 const streamsRouter = Router();
 
 streamsRouter.get('/streams/test-file', async (req, res) => {
-
-    try {
-        const readFileStream = new Stream.Readable(fs.createReadStream(path.resolve('./src/streams/testfile.txt')));
-        readFileStream.pipe(res);
-
-        // let result = "";
-
-        // readFileStream.on('data', chunk => {
-        //     console.log('Line has been read:', chunk);
-        //     result += chunk;
-        // }).pipe(res);
-    }
-    catch (e) {
-        res.send(e?.toString());
+    let str = "";
+    const readable = fs.createReadStream(path.resolve('./src/streams/testfile.txt'), { encoding: 'utf8' });
+    for await (const chunk of readable) {
+        console.log(chunk);
+        str += chunk;
     }
 
-
+    res.write(str);
     res.end();
-})
+});
 
 
 export { streamsRouter };
