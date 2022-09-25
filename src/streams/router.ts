@@ -18,4 +18,29 @@ streamsRouter.get('/streams/test-file', async (req, res) => {
 });
 
 
+streamsRouter.get('/streams/for-await', async (req, res) => {
+
+    const successPromise = new Promise((resolve, reject) => {
+        resolve("Успешное выполнение");
+    });
+
+    const failedPromise = new Promise((resolve, reject) => {
+        reject("Ошибка");
+    });
+
+    const promises: Promise<any>[] = [successPromise, failedPromise, successPromise];
+
+    try {
+        for await (const chunk of promises) {
+            console.log(chunk);
+        }
+    }
+    catch (e) {
+        console.error(e);
+    }
+
+    res.end();
+});
+
+
 export { streamsRouter };
