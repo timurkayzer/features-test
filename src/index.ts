@@ -1,5 +1,5 @@
 import * as express from "express";
-import http from 'http';
+import * as http from 'http';
 import { Server } from "socket.io";
 import { eventEmitterRouter } from "./eventemitter/router";
 import { streamsRouter } from "./streams/router";
