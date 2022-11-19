@@ -1,4 +1,4 @@
-function cartesianProduct(arr1: any[], arr2: any[], ...arr3: any[][] | undefined) {
+function cartesianProduct1(arr1: any[], arr2: any[], ...arr3: any[][] | undefined) {
     const result = [];
 
     if (!arr2) {
@@ -14,5 +14,5 @@ function cartesianProduct(arr1: any[], arr2: any[], ...arr3: any[][] | undefined
         });
     });
 
-    return arr3 ? cartesianProduct(result, arr3) : result;
+    return arr3 ? cartesianProduct1(result, arr3) : result;
 }
